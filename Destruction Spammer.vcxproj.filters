@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Исходные файлы\JNI">
+      <UniqueIdentifier>{bad06ebc-a5ab-4216-9c91-024fcf6edae1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\JNI\Classes">
+      <UniqueIdentifier>{fefcc72f-6978-4273-815b-f6e8937985c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\JNI\Classes\net">
+      <UniqueIdentifier>{07f3b6d1-b26d-4e0b-a984-c9d862101a56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\JNI\Classes\net\xtrafrancyz">
+      <UniqueIdentifier>{c4342b38-7b3b-438e-9124-f31ad76539ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\JNI\Classes\net\xtrafrancyz\util">
+      <UniqueIdentifier>{657ab18c-f3d9-4e9b-ba43-d274b89ea39f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Core">
+      <UniqueIdentifier>{dc262e06-d3f8-4471-9713-756f08510a94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Config">
+      <UniqueIdentifier>{4c78d5f2-19b0-48a4-a48c-2fa2fa42c7c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Utils">
+      <UniqueIdentifier>{8c80de54-4bab-4fd2-b59f-35b12056b2d5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DllMain.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="JNI\Classes\net\xtrafrancyz\util\CommonUtils.cpp">
+      <Filter>Исходные файлы\JNI\Classes\net\xtrafrancyz\util</Filter>
+    </ClCompile>
+    <ClCompile Include="JNI\Handler.cpp">
+      <Filter>Исходные файлы\JNI</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Spammer.cpp">
+      <Filter>Исходные файлы\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Config\ConfigManager.cpp">
+      <Filter>Исходные файлы\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Time.cpp">
+      <Filter>Исходные файлы\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\WString.cpp">
+      <Filter>Исходные файлы\Utils</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="JNI\Classes\net\xtrafrancyz\util\CommonUtils.h">
+      <Filter>Исходные файлы\JNI\Classes\net\xtrafrancyz\util</Filter>
+    </ClInclude>
+    <ClInclude Include="JNI\Handler.h">
+      <Filter>Исходные файлы\JNI</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Dictionary.h">
+      <Filter>Исходные файлы\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Spammer.h">
+      <Filter>Исходные файлы\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Config\ConfigManager.h">
+      <Filter>Исходные файлы\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Time.h">
+      <Filter>Исходные файлы\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\WString.h">
+      <Filter>Исходные файлы\Utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

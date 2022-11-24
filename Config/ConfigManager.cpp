@@ -15,7 +15,7 @@ ConfigManager::ConfigManager() {
 	if (_stat(ConfigManager::path.c_str(), &fiBuf) == -1) {
 		ofstream config(ConfigManager::path);
 		config << "delay=20s\n";
-		config << "message=Destruction Spammer â€” Ã«Ã³Ã·Ã¸Ã¨Ã© Ã±Ã¯Ã Ã¬Ã¥Ã° Ã¤Ã«Ã¿ VimeWorld!";
+		config << "message=Destruction Spammer — ëó÷øèé ñïàìåð äëÿ VimeWorld!";
 		config.close();
 	}
 }
@@ -50,7 +50,7 @@ void ConfigManager::parseConfig() {
 	char line[108];
 	string strLine;
 	char** lineParts = new char* [2];
-	
+
 	ifstream config(ConfigManager::path);
 	while (config.getline(line, 108)) {
 		strLine = line;

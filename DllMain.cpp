@@ -16,14 +16,13 @@ void onDelay() {
 	while (true) {
 		ConfigManager::parseConfig();
 		wstring formattedMessage = Spammer::getFormattedMessage(ConfigManager::message.c_str());
-
-		CommonUtils::sendMessage(JNIHandler::env->NewString(reinterpret_cast<const jchar*>(formattedMessage.c_str()),
-															static_cast<jsize>(formattedMessage.size())));
+		CommonUtils::sendMessage(JNIHandler::env->NewString(reinterpret_cast<const jchar*>(formattedMessage.c_str()), static_cast<jsize>(formattedMessage.size())));
 		Sleep(ConfigManager::delay);
 	}
 }
 
 void init() {
+	setlocale(LC_ALL, "ru");
 	JNIHandler::setVM();
 
 	ConfigManager::ConfigManager();
@@ -39,7 +38,7 @@ BOOL APIENTRY DllMain(HINSTANCE handle, DWORD reason, LPVOID lpReserved) {
 		CreateThread(nullptr, NULL, reinterpret_cast<LPTHREAD_START_ROUTINE>(init), nullptr, NULL, nullptr);
 		break;
 	case DLL_PROCESS_DETACH:
-		CloseHandle(hOnDelay);
+		if (hOnDelay != nullptr) CloseHandle(hOnDelay);
 		break;
 	}
 

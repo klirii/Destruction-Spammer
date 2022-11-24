@@ -49,9 +49,8 @@ DWORD ConfigManager::parseDelay(const char* str) {
 void ConfigManager::parseConfig() {
 	char line[108];
 	string strLine;
-
 	char** lineParts = new char* [2];
-
+	
 	ifstream config(ConfigManager::path);
 	while (config.getline(line, 108)) {
 		strLine = line;

@@ -37,6 +37,12 @@
     <Filter Include="Исходные файлы\Utils">
       <UniqueIdentifier>{8c80de54-4bab-4fd2-b59f-35b12056b2d5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\JNI\Classes\net\xtrafrancyz\mods">
+      <UniqueIdentifier>{9c9d10e1-4a7a-49e7-9e20-a67568188bf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\JNI\Classes\net\xtrafrancyz\mods\texteria">
+      <UniqueIdentifier>{d7f9d72e-9a32-4ecd-9306-4bb385a3f244}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp">
@@ -60,6 +66,9 @@
     <ClCompile Include="Utils\WString.cpp">
       <Filter>Исходные файлы\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="JNI\Classes\net\xtrafrancyz\mods\texteria\Texteria.cpp">
+      <Filter>Исходные файлы\JNI\Classes\net\xtrafrancyz\mods\texteria</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="JNI\Classes\net\xtrafrancyz\util\CommonUtils.h">
@@ -82,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="Utils\WString.h">
       <Filter>Исходные файлы\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="JNI\Classes\net\xtrafrancyz\mods\texteria\Texteria.h">
+      <Filter>Исходные файлы\JNI\Classes\net\xtrafrancyz\mods\texteria</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

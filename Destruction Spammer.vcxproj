@@ -144,6 +144,7 @@
     <ClCompile Include="Config\ConfigManager.cpp" />
     <ClCompile Include="Core\Spammer.cpp" />
     <ClCompile Include="DllMain.cpp" />
+    <ClCompile Include="JNI\Classes\net\xtrafrancyz\mods\texteria\Texteria.cpp" />
     <ClCompile Include="JNI\Classes\net\xtrafrancyz\util\CommonUtils.cpp" />
     <ClCompile Include="JNI\Handler.cpp" />
     <ClCompile Include="Utils\Time.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="Config\ConfigManager.h" />
     <ClInclude Include="Core\Dictionary.h" />
     <ClInclude Include="Core\Spammer.h" />
+    <ClInclude Include="JNI\Classes\net\xtrafrancyz\mods\texteria\Texteria.h" />
     <ClInclude Include="JNI\Classes\net\xtrafrancyz\util\CommonUtils.h" />
     <ClInclude Include="JNI\Handler.h" />
     <ClInclude Include="Utils\Time.h" />

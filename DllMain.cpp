@@ -4,7 +4,9 @@
 #include "JNI/Handler.h"
 #include "Config/ConfigManager.h"
 #include "Core/Spammer.h"
+
 #include "JNI/Classes/net/xtrafrancyz/util/CommonUtils.h"
+#include "JNI/Classes/net/xtrafrancyz/mods/texteria/Texteria.h"
 using namespace std;
 
 HANDLE hOnDelay = nullptr;
@@ -14,6 +16,16 @@ void onDelay() {
 	JNIHandler::setClassLoader();
 
 	while (true) {
+		string serverId = Texteria::tryGetServerId("null");
+		if (serverId == "null") {
+			Sleep(ConfigManager::delay);
+			continue;
+		}
+		if (serverId.find("'") != string::npos && serverId.find("LOBBY") != string::npos) {
+			Sleep(ConfigManager::delay);
+			continue;
+		}
+
 		ConfigManager::parseConfig();
 		wstring formattedMessage = Spammer::getFormattedMessage(ConfigManager::message.c_str());
 		CommonUtils::sendMessage(JNIHandler::env->NewString(reinterpret_cast<const jchar*>(formattedMessage.c_str()), static_cast<jsize>(formattedMessage.size())));

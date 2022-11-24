@@ -1,5 +1,4 @@
 #pragma once
-
 class TimeNow {
 public:
 	static __int64 UnixNano();

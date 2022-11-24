@@ -1,6 +1,4 @@
 #include "Handler.h"
-#include <iostream>
-using namespace std;
 
 JavaVM* JNIHandler::vm	= nullptr;
 HMODULE JNIHandler::jvm = GetModuleHandleA("jvm.dll");

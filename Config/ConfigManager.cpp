@@ -1,5 +1,4 @@
 #define _CRT_SECURE_NO_WARNINGS
-
 #include "ConfigManager.h"
 #include <fstream>
 
@@ -14,7 +13,7 @@ string ConfigManager::message;
 ConfigManager::ConfigManager() {
 	struct _stat fiBuf;
 	if (_stat(ConfigManager::path.c_str(), &fiBuf) == -1) {
-		ofstream config(ConfigManager::path);
+		fstream config(ConfigManager::path);
 		config << "delay=20s\n";
 		config << "message=Destruction Spammer Ч лучший спамер дл€ VimeWorld!";
 		config.close();

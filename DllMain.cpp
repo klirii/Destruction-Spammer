@@ -1,9 +1,5 @@
-#define _CRT_SECURE_NO_WARNINGS
-
 #include <Windows.h>
 #include <iostream>
-#include <vector>
-#include <chrono>
 
 #include "JNI/Handler.h"
 #include "Config/ConfigManager.h"
@@ -20,17 +16,14 @@ void onDelay() {
 	while (true) {
 		ConfigManager::parseConfig();
 		wstring formattedMessage = Spammer::getFormattedMessage(ConfigManager::message.c_str());
-		CommonUtils::sendMessage(JNIHandler::env->NewString(reinterpret_cast<const jchar*>(formattedMessage.c_str()), formattedMessage.size()));
+
+		CommonUtils::sendMessage(JNIHandler::env->NewString(reinterpret_cast<const jchar*>(formattedMessage.c_str()),
+															static_cast<jsize>(formattedMessage.size())));
 		Sleep(ConfigManager::delay);
 	}
 }
 
 void init() {
-//	AllocConsole();
-//#	pragma warning(suppress:6031)
-//	freopen("CONOUT$", "w", stdout);
-//	setlocale(LC_ALL, "ru");
-
 	JNIHandler::setVM();
 
 	ConfigManager::ConfigManager();
@@ -47,6 +40,7 @@ BOOL APIENTRY DllMain(HINSTANCE handle, DWORD reason, LPVOID lpReserved) {
 		break;
 	case DLL_PROCESS_DETACH:
 		CloseHandle(hOnDelay);
+		break;
 	}
 
 	return TRUE;

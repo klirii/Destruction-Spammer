@@ -1,7 +1,5 @@
 #include "CommonUtils.h"
 #include "../../../../Handler.h"
-#include <iostream>
-using namespace std;
 
 void CommonUtils::sendMessage(jstring message) {
 	jclass CommonUtils = JNIHandler::FindClass("net/xtrafrancyz/util/CommonUtils");

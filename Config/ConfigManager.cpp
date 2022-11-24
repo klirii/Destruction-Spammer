@@ -13,9 +13,9 @@ string ConfigManager::message;
 ConfigManager::ConfigManager() {
 	struct _stat fiBuf;
 	if (_stat(ConfigManager::path.c_str(), &fiBuf) == -1) {
-		fstream config(ConfigManager::path);
+		ofstream config(ConfigManager::path);
 		config << "delay=20s\n";
-		config << "message=Destruction Spammer — ëó÷øèé ñïàìåð äëÿ VimeWorld!";
+		config << "message=Destruction Spammer â€” Ã«Ã³Ã·Ã¸Ã¨Ã© Ã±Ã¯Ã Ã¬Ã¥Ã° Ã¤Ã«Ã¿ VimeWorld!";
 		config.close();
 	}
 }

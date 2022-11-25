@@ -147,6 +147,7 @@
     <ClCompile Include="JNI\Classes\net\xtrafrancyz\mods\texteria\Texteria.cpp" />
     <ClCompile Include="JNI\Classes\net\xtrafrancyz\util\CommonUtils.cpp" />
     <ClCompile Include="JNI\Handler.cpp" />
+    <ClCompile Include="Utils\String.cpp" />
     <ClCompile Include="Utils\Time.cpp" />
     <ClCompile Include="Utils\WString.cpp" />
   </ItemGroup>
@@ -157,6 +158,7 @@
     <ClInclude Include="JNI\Classes\net\xtrafrancyz\mods\texteria\Texteria.h" />
     <ClInclude Include="JNI\Classes\net\xtrafrancyz\util\CommonUtils.h" />
     <ClInclude Include="JNI\Handler.h" />
+    <ClInclude Include="Utils\String.h" />
     <ClInclude Include="Utils\Time.h" />
     <ClInclude Include="Utils\WString.h" />
   </ItemGroup>

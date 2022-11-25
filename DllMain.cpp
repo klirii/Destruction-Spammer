@@ -4,17 +4,18 @@
 #include "JNI/Handler.h"
 #include "Config/ConfigManager.h"
 #include "Core/Spammer.h"
+#include "Utils/WString.h"
 
 #include "JNI/Classes/net/xtrafrancyz/util/CommonUtils.h"
 #include "JNI/Classes/net/xtrafrancyz/mods/texteria/Texteria.h"
 using namespace std;
 
 HANDLE hOnDelay = nullptr;
-
 void onDelay() {
 	JNIHandler::setEnv();
 	JNIHandler::setClassLoader();
-
+	
+	UCHAR messageCounter = 0;
 	while (true) {
 		string serverId = Texteria::tryGetServerId("null");
 		if (serverId == "null") {
@@ -27,8 +28,14 @@ void onDelay() {
 		}
 
 		ConfigManager::parseConfig();
-		wstring formattedMessage = Spammer::getFormattedMessage(ConfigManager::message.c_str());
-		CommonUtils::sendMessage(JNIHandler::env->NewString(reinterpret_cast<const jchar*>(formattedMessage.c_str()), static_cast<jsize>(formattedMessage.size())));
+		wstring message;
+
+		if (ConfigManager::antiMute) message = Spammer::getFormattedMessage(ConfigManager::messages[messageCounter].c_str());
+		else message = WString::GetWStringFromÑString(ConfigManager::messages[messageCounter].c_str());
+		CommonUtils::sendMessage(JNIHandler::env->NewString(reinterpret_cast<const jchar*>(message.c_str()), static_cast<jsize>(message.size())));
+
+		messageCounter++;
+		if (messageCounter == ConfigManager::messages.size()) messageCounter = 0;
 		Sleep(ConfigManager::delay);
 	}
 }

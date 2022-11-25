@@ -13,3 +13,9 @@ wstring WString::GetSymbolFromCString(const char* str, USHORT index) {
 	delete[] messageDup;
 	return ws;
 }
+
+wstring WString::GetWStringFrom—String(const char* str) {
+	wstring ws(strlen(str), L'\0');
+	mbstowcs(&ws[0], str, strlen(str));
+	return ws;
+}

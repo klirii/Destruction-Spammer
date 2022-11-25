@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "ConfigManager.h"
+#include "../Utils/String.h"
 #include <fstream>
 
 #include <StringUtils.h>
@@ -7,14 +8,16 @@
 
 string ConfigManager::path = string(getenv("APPDATA")) + "\\.vimeworld\\minigames\\Spammer.ini";
 
-DWORD  ConfigManager::delay = 0;
-string ConfigManager::message;
+DWORD ConfigManager::delay = 0;
+bool  ConfigManager::antiMute = true;
+vector<string> ConfigManager::messages;
 
 ConfigManager::ConfigManager() {
 	struct _stat fiBuf;
 	if (_stat(ConfigManager::path.c_str(), &fiBuf) == -1) {
 		ofstream config(ConfigManager::path);
 		config << "delay=20s\n";
+		config << "antimute=true\n";
 		config << "message=Destruction Spammer Ч лучший спамер дл€ VimeWorld!";
 		config.close();
 	}
@@ -49,18 +52,26 @@ DWORD ConfigManager::parseDelay(const char* str) {
 void ConfigManager::parseConfig() {
 	char line[108];
 	string strLine;
+
 	char** lineParts = new char* [2];
+	string tmpLinePart;
 
 	ifstream config(ConfigManager::path);
 	while (config.getline(line, 108)) {
 		strLine = line;
 		if (strLine.find("delay") != string::npos) {
 			StringUtils::split(line, '=', lineParts);
-			ConfigManager::delay = ConfigManager::parseDelay(lineParts[1]);
+			ConfigManager::delay = ConfigManager::parseDelay(String(lineParts[1]).toLower().c_str());
+		}
+		else if (strLine.find("antimute") != string::npos) {
+			StringUtils::split(line, '=', lineParts);
+			if (strcmp(String(lineParts[1]).toLower().c_str(), "true") == 0) ConfigManager::antiMute = true;
+			else if (strcmp(String(lineParts[1]).toLower().c_str(), "false") == 0) ConfigManager::antiMute = false;
 		}
 		else if (strLine.find("message") != string::npos) {
+			if (ConfigManager::messages.size() == 255) break;
 			StringUtils::split(line, '=', lineParts);
-			ConfigManager::message = lineParts[1];
+			ConfigManager::messages.push_back(lineParts[1]);
 		}
 	}
 

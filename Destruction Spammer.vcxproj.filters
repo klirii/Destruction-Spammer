@@ -43,6 +43,12 @@
     <Filter Include="Исходные файлы\JNI\Classes\net\xtrafrancyz\mods\texteria">
       <UniqueIdentifier>{d7f9d72e-9a32-4ecd-9306-4bb385a3f244}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\Utils\Strings">
+      <UniqueIdentifier>{4354c0ec-69c5-4f46-83e0-48620a1c7bee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Core\Settings">
+      <UniqueIdentifier>{2682b8f0-9e7f-4709-ade4-f750467e562b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp">
@@ -63,14 +69,14 @@
     <ClCompile Include="Utils\Time.cpp">
       <Filter>Исходные файлы\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Utils\WString.cpp">
-      <Filter>Исходные файлы\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="JNI\Classes\net\xtrafrancyz\mods\texteria\Texteria.cpp">
       <Filter>Исходные файлы\JNI\Classes\net\xtrafrancyz\mods\texteria</Filter>
     </ClCompile>
-    <ClCompile Include="Utils\String.cpp">
-      <Filter>Исходные файлы\Utils</Filter>
+    <ClCompile Include="Utils\Strings\String.cpp">
+      <Filter>Исходные файлы\Utils\Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Strings\WString.cpp">
+      <Filter>Исходные файлы\Utils\Strings</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -79,9 +85,6 @@
     </ClInclude>
     <ClInclude Include="JNI\Handler.h">
       <Filter>Исходные файлы\JNI</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Dictionary.h">
-      <Filter>Исходные файлы\Core</Filter>
     </ClInclude>
     <ClInclude Include="Core\Spammer.h">
       <Filter>Исходные файлы\Core</Filter>
@@ -92,14 +95,20 @@
     <ClInclude Include="Utils\Time.h">
       <Filter>Исходные файлы\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Utils\WString.h">
-      <Filter>Исходные файлы\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="JNI\Classes\net\xtrafrancyz\mods\texteria\Texteria.h">
       <Filter>Исходные файлы\JNI\Classes\net\xtrafrancyz\mods\texteria</Filter>
     </ClInclude>
-    <ClInclude Include="Utils\String.h">
-      <Filter>Исходные файлы\Utils</Filter>
+    <ClInclude Include="Utils\Strings\String.h">
+      <Filter>Исходные файлы\Utils\Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Strings\WString.h">
+      <Filter>Исходные файлы\Utils\Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Settings\Dictionary.h">
+      <Filter>Исходные файлы\Core\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Settings\Keycodes.h">
+      <Filter>Исходные файлы\Core\Settings</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

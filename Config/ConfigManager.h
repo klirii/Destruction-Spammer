@@ -6,8 +6,9 @@ using namespace std;
 
 class ConfigManager {
 public:
+	static bool antiMute;
 	static DWORD delay;
-	static bool  antiMute;
+	static string keybind;
 	static vector<string> messages;
 
 	ConfigManager();

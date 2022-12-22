@@ -1,12 +1,13 @@
 #include "Handler.h"
 
-JavaVM* JNIHandler::vm	= nullptr;
 HMODULE JNIHandler::jvm = GetModuleHandleA("jvm.dll");
+JavaVM* JNIHandler::vm	= nullptr;
 
 JNIEnv* JNIHandler::env = nullptr;
 jobject JNIHandler::ClassLoader = nullptr;
 
 JNIHandler::pJVM_FindClassFromCaller JNIHandler::JVM_FindClassFromCaller = reinterpret_cast<JNIHandler::pJVM_FindClassFromCaller>(GetProcAddress(JNIHandler::jvm, "IIllIlIIIlll"));
+JNIHandler::pJVM_FindLoadedClass JNIHandler::JVM_FindLoadedClass = reinterpret_cast<JNIHandler::pJVM_FindLoadedClass>(GetProcAddress(JNIHandler::jvm, "IllIIlIllIlI"));
 
 void JNIHandler::setVM() {
 	typedef jint(JNICALL* pJNI_GetCreatedJavaVMs)(JavaVM** vmBuf, jsize bufLen, jsize* nVMs);
@@ -19,11 +20,15 @@ void JNIHandler::setEnv() {
 }
 
 void JNIHandler::setClassLoader() {
-	jclass klass = JNIHandler::env->FindClass("net/xtrafrancyz/vl/iIII");
-	jfieldID fid = JNIHandler::env->GetStaticFieldID(klass, " ", "Lnet/xtrafrancyz/vl/IiIiii;");
+	jclass klass = JNIHandler::env->FindClass("net/xtrafrancyz/vl/iIiIiI");
+	jfieldID fid = JNIHandler::env->GetStaticFieldID(klass, " ", "Lnet/xtrafrancyz/vl/IIiIii;");
 	JNIHandler::ClassLoader = JNIHandler::env->GetStaticObjectField(klass, fid);
 }
 
-jclass JNIHandler::FindClass(const char* name) {
+jclass JNIHandler::FindClassFromCaller(const char* name) {
 	return JVM_FindClassFromCaller(JNIHandler::env, name, true, JNIHandler::ClassLoader, nullptr);
+}
+
+jclass JNIHandler::FindLoadedClass(const char* name) {
+	return JVM_FindLoadedClass(JNIHandler::env, JNIHandler::ClassLoader, env->NewStringUTF(name));
 }

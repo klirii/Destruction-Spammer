@@ -1,8 +1,8 @@
 #include "Spammer.h"
-#include "Dictionary.h"
+#include "Settings/Dictionary.h"
 
 #include "../Utils/Time.h"
-#include "../Utils/WString.h"
+#include "../Utils/Strings/WString.h"
 
 byte Spammer::ReplaceProbability = 75;
 

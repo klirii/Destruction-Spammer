@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "ConfigManager.h"
-#include "../Utils/String.h"
+#include "../Utils/Strings/String.h"
 #include <fstream>
 
 #include <StringUtils.h>
@@ -8,14 +8,16 @@
 
 string ConfigManager::path = string(getenv("APPDATA")) + "\\.vimeworld\\minigames\\Spammer.ini";
 
+bool ConfigManager::antiMute = true;
 DWORD ConfigManager::delay = 0;
-bool  ConfigManager::antiMute = true;
+string ConfigManager::keybind;
 vector<string> ConfigManager::messages;
 
 ConfigManager::ConfigManager() {
 	struct _stat fiBuf;
 	if (_stat(ConfigManager::path.c_str(), &fiBuf) == -1) {
 		ofstream config(ConfigManager::path);
+		config << "keybind=F10\n";
 		config << "delay=20s\n";
 		config << "antimute=true\n";
 		config << "message=Destruction Spammer Ч лучший спамер дл€ VimeWorld!";
@@ -59,7 +61,11 @@ void ConfigManager::parseConfig() {
 	ifstream config(ConfigManager::path);
 	while (config.getline(line, 108)) {
 		strLine = line;
-		if (strLine.find("delay") != string::npos) {
+		if (strLine.find("keybind") != string::npos) {
+			StringUtils::split(line, '=', lineParts);
+			ConfigManager::keybind = String(lineParts[1]).toUpper();
+		}
+		else if (strLine.find("delay") != string::npos) {
 			StringUtils::split(line, '=', lineParts);
 			ConfigManager::delay = ConfigManager::parseDelay(String(lineParts[1]).toLower().c_str());
 		}

@@ -4,7 +4,8 @@
 #include "JNI/Handler.h"
 #include "Config/ConfigManager.h"
 #include "Core/Spammer.h"
-#include "Utils/WString.h"
+#include "Core/Settings/Keycodes.h"
+#include "Utils/Strings/WString.h"
 
 #include "JNI/Classes/net/xtrafrancyz/util/CommonUtils.h"
 #include "JNI/Classes/net/xtrafrancyz/mods/texteria/Texteria.h"
@@ -14,29 +15,42 @@ HANDLE hOnDelay = nullptr;
 void onDelay() {
 	JNIHandler::setEnv();
 	JNIHandler::setClassLoader();
-	
+
+	bool isEnabled = false;
 	UCHAR messageCounter = 0;
 	while (true) {
-		string serverId = Texteria::tryGetServerId("null");
-		if (serverId == "null") {
-			Sleep(ConfigManager::delay);
-			continue;
-		}
-		if (serverId.find("'") != string::npos && serverId.find("LOBBY") != string::npos) {
-			Sleep(ConfigManager::delay);
-			continue;
+		if (Keycodes.count(ConfigManager::keybind)) {
+			if (GetAsyncKeyState(Keycodes[ConfigManager::keybind]))
+				isEnabled = !isEnabled;
+			while (GetAsyncKeyState(Keycodes[ConfigManager::keybind])) {}
 		}
 
-		ConfigManager::parseConfig();
-		wstring message;
+		if (isEnabled) {
+			string serverId = Texteria::tryGetServerId("null");
+			if (serverId == "null") {
+				Sleep(ConfigManager::delay);
+				continue;
+			}
+			if (serverId.find("'") != string::npos && serverId.find("LOBBY") != string::npos) {
+				Sleep(ConfigManager::delay);
+				continue;
+			}
 
-		if (ConfigManager::antiMute) message = Spammer::getFormattedMessage(ConfigManager::messages[messageCounter].c_str());
-		else message = WString::GetWStringFromÑString(ConfigManager::messages[messageCounter].c_str());
-		CommonUtils::sendMessage(JNIHandler::env->NewString(reinterpret_cast<const jchar*>(message.c_str()), static_cast<jsize>(message.size())));
+			ConfigManager::messages.clear();
+			ConfigManager::parseConfig();
 
-		messageCounter++;
-		if (messageCounter == ConfigManager::messages.size()) messageCounter = 0;
-		Sleep(ConfigManager::delay);
+			wstring message;
+			if (ConfigManager::antiMute) message = Spammer::getFormattedMessage(ConfigManager::messages[messageCounter].c_str());
+			else message = WString::GetWStringFromÑString(ConfigManager::messages[messageCounter].c_str());
+			CommonUtils::sendMessage(JNIHandler::env->NewString(reinterpret_cast<const jchar*>(message.c_str()), static_cast<jsize>(message.size())));
+
+			messageCounter++;
+			if (messageCounter == ConfigManager::messages.size()) messageCounter = 0;
+
+			Sleep(ConfigManager::delay);
+		}
+
+		Sleep(250);
 	}
 }
 

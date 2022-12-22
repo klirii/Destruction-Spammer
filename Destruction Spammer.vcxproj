@@ -147,20 +147,21 @@
     <ClCompile Include="JNI\Classes\net\xtrafrancyz\mods\texteria\Texteria.cpp" />
     <ClCompile Include="JNI\Classes\net\xtrafrancyz\util\CommonUtils.cpp" />
     <ClCompile Include="JNI\Handler.cpp" />
-    <ClCompile Include="Utils\String.cpp" />
+    <ClCompile Include="Utils\Strings\String.cpp" />
+    <ClCompile Include="Utils\Strings\WString.cpp" />
     <ClCompile Include="Utils\Time.cpp" />
-    <ClCompile Include="Utils\WString.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Config\ConfigManager.h" />
-    <ClInclude Include="Core\Dictionary.h" />
+    <ClInclude Include="Core\Settings\Dictionary.h" />
+    <ClInclude Include="Core\Settings\Keycodes.h" />
     <ClInclude Include="Core\Spammer.h" />
     <ClInclude Include="JNI\Classes\net\xtrafrancyz\mods\texteria\Texteria.h" />
     <ClInclude Include="JNI\Classes\net\xtrafrancyz\util\CommonUtils.h" />
     <ClInclude Include="JNI\Handler.h" />
-    <ClInclude Include="Utils\String.h" />
+    <ClInclude Include="Utils\Strings\String.h" />
+    <ClInclude Include="Utils\Strings\WString.h" />
     <ClInclude Include="Utils\Time.h" />
-    <ClInclude Include="Utils\WString.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

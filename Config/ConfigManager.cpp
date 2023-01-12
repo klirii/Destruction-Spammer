@@ -41,8 +41,9 @@ DWORD ConfigManager::parseDelay(const char* str) {
 				delay[i] = '\0';
 
 				DWORD ms = atoi(delay) * unitMultipliers[j];
-				if (ms > 86400000) return NULL;
 				delete[] delay;
+
+				if (ms > 86400000) return NULL;
 				return ms;
 			}
 		}

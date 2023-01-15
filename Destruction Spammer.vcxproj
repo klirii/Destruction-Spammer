@@ -81,7 +81,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Program Files\Java\jdk1.8.0_291\include;C:\Program Files\Java\jdk1.8.0_291\include\win32;C:\Program Files\Java\jdk1.8.0_291\include\win32\bridge;D:\libs\cpp_string_utils-main\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Program Files\Java\jdk1.8.0_291\include;C:\Program Files\Java\jdk1.8.0_291\include\win32;C:\Program Files\Java\jdk1.8.0_291\include\win32\bridge;D:\libs\cpp_string_utils-main\include;D:\libs\json\include;D:\libs\md5cpp\include;D:\libs\curl-7.87.0\builds\Release x64\include;$(IncludePath)</IncludePath>
+    <TargetName>spammer</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -131,13 +132,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\libs\arc4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>D:\libs\curl-7.87.0\builds\Release x64\lib\libcurl_a.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -147,6 +149,8 @@
     <ClCompile Include="JNI\Classes\net\xtrafrancyz\mods\texteria\Texteria.cpp" />
     <ClCompile Include="JNI\Classes\net\xtrafrancyz\util\CommonUtils.cpp" />
     <ClCompile Include="JNI\Handler.cpp" />
+    <ClCompile Include="RestAPI\Core\Client.cpp" />
+    <ClCompile Include="RestAPI\Utils\Utils.cpp" />
     <ClCompile Include="Utils\Strings\String.cpp" />
     <ClCompile Include="Utils\Strings\WString.cpp" />
     <ClCompile Include="Utils\Time.cpp" />
@@ -159,6 +163,9 @@
     <ClInclude Include="JNI\Classes\net\xtrafrancyz\mods\texteria\Texteria.h" />
     <ClInclude Include="JNI\Classes\net\xtrafrancyz\util\CommonUtils.h" />
     <ClInclude Include="JNI\Handler.h" />
+    <ClInclude Include="RestAPI\Core\Client.hpp" />
+    <ClInclude Include="RestAPI\Utils\Utils.hpp" />
+    <ClInclude Include="Utils\Hashes.hpp" />
     <ClInclude Include="Utils\Strings\String.h" />
     <ClInclude Include="Utils\Strings\WString.h" />
     <ClInclude Include="Utils\Time.h" />

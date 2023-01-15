@@ -13,7 +13,11 @@ public:
 
 	ConfigManager();
 	static void parseConfig();
+	static string parseUsername(bool game = false);
 private:
 	static string path;
+	static string gamePath;
+	static string loaderPath;
+
 	static DWORD parseDelay(const char* str);
 };

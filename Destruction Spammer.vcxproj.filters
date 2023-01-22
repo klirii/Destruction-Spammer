@@ -134,5 +134,8 @@
     <ClInclude Include="Utils\Hashes.hpp">
       <Filter>Исходные файлы\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Utils\Strings\Conversions.hpp">
+      <Filter>Исходные файлы\Utils\Strings</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,7 +1,9 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include "ConfigManager.h"
+
 #include "../Utils/Strings/String.h"
+#include "../Utils/Strings/Conversions.hpp"
 
 #include <fstream>
 #include <codecvt>
@@ -22,12 +24,15 @@ vector<string> ConfigManager::messages;
 string ConfigManager::parseUsername(bool game) {
 	if (!game) {
 		loaderPath = string(getenv("APPDATA")) + "\\.vimeworld\\jre-x64\\lib\\security\\java8.security";
+		wstring username;
 
-		char username[12];
-		ifstream(loaderPath).getline(username, 12);
+		wifstream config(loaderPath);
+		config.imbue(locale(locale::empty(), new codecvt_utf8<wchar_t>));
+		getline(config, username);
 
-		if (string(username).empty()) return "";
-		return string(username);
+		config.close();
+		if (string(username.begin(), username.end()).empty()) return "";
+		return string(username.begin(), username.end());
 	}
 	else {
 		gamePath = string(getenv("APPDATA")) + "\\.vimeworld\\config";
@@ -41,6 +46,7 @@ string ConfigManager::parseUsername(bool game) {
 		char* lineParts[2];
 		StringUtils::split(string(username.begin(), username.end()).c_str(), ':', lineParts);
 
+		config.close();
 		if (string(lineParts[1]).empty()) return "";
 		return string(lineParts[1]);
 	}
@@ -51,11 +57,14 @@ ConfigManager::ConfigManager() {
 
 	struct _stat fiBuf;
 	if (_stat(ConfigManager::path.c_str(), &fiBuf) == -1) {
-		ofstream config(ConfigManager::path);
-		config << "keybind=F10\n";
-		config << "delay=20s\n";
-		config << "antimute=true\n";
-		config << "message=Destruction Spammer Ч лучший спамер дл€ VimeWorld!";
+		wofstream config(ConfigManager::path, ios::binary);
+		config.imbue(locale(locale::empty(), new codecvt_utf8<wchar_t>));
+
+		cout << "pidor" << endl;
+		config << L"keybind=F10\n";
+		config << L"delay=20s\n";
+		config << L"antimute=true\n";
+		config << L"message=Destruction Spammer - лучший спамер дл€ VimeWorld!";
 		config.close();
 	}
 }
@@ -89,10 +98,14 @@ DWORD ConfigManager::parseDelay(const char* str) {
 
 void ConfigManager::parseConfig() {
 	string line;
-	char** lineParts = new char* [2];
+	wstring wline;
+	char* lineParts[2];
 
-	ifstream config(ConfigManager::path);
-	while (std::getline(config, line)) {
+	wifstream config(ConfigManager::path);
+	config.imbue(locale(locale::empty(), new codecvt_utf8<wchar_t>));
+
+	while (getline(config, wline)) {
+		line = unicode2ansi(wline);
 		if (line.find("keybind") != string::npos) {
 			StringUtils::split(line.c_str(), '=', lineParts);
 			ConfigManager::keybind = String(lineParts[1]).toUpper();
@@ -114,6 +127,4 @@ void ConfigManager::parseConfig() {
 			ConfigManager::messages.push_back(lineParts[1]);
 		}
 	}
-
-	StringUtils::remove(lineParts, 2);
 }

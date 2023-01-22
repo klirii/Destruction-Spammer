@@ -22,8 +22,7 @@ using namespace std;
 
 static RestAPI::Client client;
 
-HANDLE hOnDelay = nullptr;
-void onDelay() {
+void checkKeybind(LPVOID isEnabled) {
 	map<string, byte> Keycodes = {
 		{"MBUTTON", VK_MBUTTON},
 		{"XBUTTON1", VK_XBUTTON1},
@@ -125,17 +124,27 @@ void onDelay() {
 		{"DOWN", VK_DOWN},
 	};
 
+	while (true) {
+		if (Keycodes.count(ConfigManager::keybind)) {
+			if (GetAsyncKeyState(Keycodes[ConfigManager::keybind]) & 1) {
+				*(bool*)isEnabled = !(*(bool*)isEnabled);
+			}
+		}
+	}
+}
+
+HANDLE hOnDelay = nullptr;
+void onDelay() {
 	JNIHandler::setEnv();
 	JNIHandler::setClassLoader();
 
 	bool isEnabled = false;
 	UCHAR messageCounter = 0;
+
+	CreateThread(nullptr, NULL, reinterpret_cast<LPTHREAD_START_ROUTINE>(checkKeybind), &isEnabled, NULL, nullptr);
 	while (true) {
-		if (Keycodes.count(ConfigManager::keybind)) {
-			if (GetAsyncKeyState(Keycodes[ConfigManager::keybind]))
-				isEnabled = !isEnabled;
-			while (GetAsyncKeyState(Keycodes[ConfigManager::keybind])) {}
-		}
+		ConfigManager::messages.clear();
+		ConfigManager::parseConfig();
 
 		if (isEnabled) {
 			string serverId = Texteria::tryGetServerId("null");
@@ -147,9 +156,6 @@ void onDelay() {
 				Sleep(ConfigManager::delay);
 				continue;
 			}
-
-			ConfigManager::messages.clear();
-			ConfigManager::parseConfig();
 
 			wstring message;
 			if (ConfigManager::antiMute) message = Spammer::getFormattedMessage(ConfigManager::messages[messageCounter].c_str());
@@ -202,6 +208,7 @@ void initStaticsAndGlobals() {
 BOOL APIENTRY DllMain(HINSTANCE handle, DWORD reason, LPVOID reserved) {
 	switch (reason) {
 	case DLL_VIMEWORLD_ATTACH:
+		setlocale(LC_ALL, "ru");
 		initStaticsAndGlobals();
 
 		client.host = "https://destructiqn.com:9990";

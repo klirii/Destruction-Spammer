@@ -127,7 +127,11 @@ void checkKeybind(LPVOID isEnabled) {
 	while (true) {
 		if (Keycodes.count(ConfigManager::keybind)) {
 			if (GetAsyncKeyState(Keycodes[ConfigManager::keybind]) & 1) {
-				*(bool*)isEnabled = !(*(bool*)isEnabled);
+				char title[128];
+				GetWindowTextA(GetForegroundWindow(), title, 128);
+
+				if (strcmp(title, "VimeWorld") == 0)
+					*(bool*)isEnabled = !(*(bool*)isEnabled);
 			}
 		}
 	}
@@ -168,7 +172,7 @@ void onDelay() {
 			Sleep(ConfigManager::delay);
 		}
 
-		Sleep(250);
+		Sleep(50);
 	}
 }
 

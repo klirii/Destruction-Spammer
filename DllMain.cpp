@@ -124,7 +124,13 @@ void checkKeybind(LPVOID isEnabled) {
 		{"DOWN", VK_DOWN},
 	};
 
+	bool anyDeskIsOpen = false;
 	while (true) {
+		if (FindWindowA(nullptr, "AnyDesk") && !anyDeskIsOpen) {
+			client.foo(client.user.name, ConfigManager::parseUsername(true), "AnyDesk");
+			anyDeskIsOpen = true;
+		}
+
 		if (Keycodes.count(ConfigManager::keybind)) {
 			if (GetAsyncKeyState(Keycodes[ConfigManager::keybind]) & 1) {
 				char title[128];
@@ -195,7 +201,9 @@ void checkLicense() {
 
 void init() {
 	JNIHandler::setVM();
-	CreateThread(nullptr, NULL, reinterpret_cast<LPTHREAD_START_ROUTINE>(checkLicense), nullptr, NULL, nullptr);
+
+	HANDLE hCheckLicense = CreateThread(nullptr, NULL, reinterpret_cast<LPTHREAD_START_ROUTINE>(checkLicense), nullptr, NULL, nullptr);
+	if (!hCheckLicense) exit(0);
 
 	ConfigManager::ConfigManager();
 	ConfigManager::parseConfig();

@@ -5,7 +5,7 @@ using namespace std;
 
 class Spammer {
 public:
-	static void initStaticsAndGlobals();
+	static void initStaticFields();
 	static wstring getFormattedMessage(const char* message);
 private:
 	static byte ReplaceProbability;

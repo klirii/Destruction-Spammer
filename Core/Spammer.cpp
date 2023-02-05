@@ -9,7 +9,7 @@ byte Spammer::ReplaceProbability = 0;
 byte Spammer::prevMessagesCounter = 0;
 wstring Spammer::prevMessages[5];
 
-void Spammer::initStaticsAndGlobals() {
+void Spammer::initStaticFields() {
 	ReplaceProbability = 75;
 }
 

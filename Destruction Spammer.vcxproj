@@ -82,7 +82,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>D:\Program Files\Java\jdk1.8.0_351\include;D:\Program Files\Java\jdk1.8.0_351\include\win32;D:\Program Files\Java\jdk1.8.0_351\include\win32\bridge;D:\libs\cpp_string_utils-main\include;D:\libs\json\include;D:\libs\md5cpp\include;D:\libs\curl\Release x64\include;$(IncludePath)</IncludePath>
+    <IncludePath>D:\Program Files\Java\jdk1.8.0_191\include;D:\Program Files\Java\jdk1.8.0_191\include\win32;D:\Program Files\Java\jdk1.8.0_191\include\win32\bridge;D:\libs\cpp_string_utils-main\include;D:\libs\json\include;D:\libs\md5cpp\include;D:\libs\curl\Release x64\include;$(IncludePath)</IncludePath>
     <TargetName>spammer</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -161,12 +161,14 @@
     <ClInclude Include="Core\Settings\Dictionary.h" />
     <ClInclude Include="Core\Settings\Keycodes.h" />
     <ClInclude Include="Core\Spammer.h" />
+    <ClInclude Include="DllMain.hpp" />
     <ClInclude Include="JNI\Classes\net\xtrafrancyz\mods\texteria\Texteria.h" />
     <ClInclude Include="JNI\Classes\net\xtrafrancyz\util\CommonUtils.h" />
     <ClInclude Include="JNI\Handler.h" />
     <ClInclude Include="RestAPI\Core\Client.hpp" />
     <ClInclude Include="RestAPI\Utils\Utils.hpp" />
     <ClInclude Include="Utils\Hashes.hpp" />
+    <ClInclude Include="Utils\Keybind.hpp" />
     <ClInclude Include="Utils\Strings\Conversions.hpp" />
     <ClInclude Include="Utils\Strings\String.h" />
     <ClInclude Include="Utils\Strings\WString.h" />

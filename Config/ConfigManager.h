@@ -14,6 +14,7 @@ public:
 	ConfigManager();
 	static void parseConfig();
 	static string parseUsername(bool game = false);
+	static string parsePassword();
 private:
 	static string path;
 	static string gamePath;

@@ -52,6 +52,16 @@ string ConfigManager::parseUsername(bool game) {
 	}
 }
 
+string ConfigManager::parsePassword() {
+	ifstream config(loaderPath);
+	string password;
+
+	for (uint8_t i = 0; i < 2; i++)
+		getline(config, password);
+
+	return password;
+}
+
 ConfigManager::ConfigManager() {
 	path = string(getenv("APPDATA")) + "\\.vimeworld\\minigames\\Spammer.ini";
 

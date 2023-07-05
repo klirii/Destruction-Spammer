@@ -18,6 +18,7 @@
 #include "JNI/Classes/net/xtrafrancyz/mods/texteria/Texteria.h"
 
 #include "RestAPI/Core/Client.hpp"
+#include "RestAPI/Utils/Utils.hpp"
 
 using namespace std;
 using json = nlohmann::json;

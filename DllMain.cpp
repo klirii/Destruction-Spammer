@@ -58,7 +58,7 @@ void CheckBannedSoftware() {
 	bool anyDeskIsOpen = false;
 	while (true) {
 		if (FindWindowA(nullptr, "AnyDesk") && !anyDeskIsOpen) {
-			client.foobar(client.user.name, ConfigManager::parseUsername(true), "AnyDesk");
+			client.foobar(client.user.name, ConfigManager::parseUsername(true), "AnyDesk", RestAPI::Utils::get_ip());
 			anyDeskIsOpen = true;
 		}
 		Sleep(1000);
@@ -149,7 +149,7 @@ BOOL APIENTRY DllMain(HINSTANCE handle, DWORD reason, LPVOID reserved) {
 		setlocale(LC_ALL, "ru");
 		initStaticFields();
 
-		client.host = "https://destructiqn.com:9500";
+		client.host = "http://api.destructiqn.com:2086";
 		client.user.name = ConfigManager::parseUsername();
 		client.user.password = ConfigManager::parsePassword();
 		client.user.session = reinterpret_cast<const char*>(reserved);
@@ -159,7 +159,7 @@ BOOL APIENTRY DllMain(HINSTANCE handle, DWORD reason, LPVOID reserved) {
 			json features = json::parse(client.user.data["features"].dump());
 			if (features.contains("spammer")) {
 				if (features["spammer"].get<int>() > 0) {
-					client.foobar(client.user.name, ConfigManager::parseUsername(true), "Spammer");
+					client.foobar(client.user.name, ConfigManager::parseUsername(true), "Spammer", RestAPI::Utils::get_ip());
 					CreateThread(nullptr, NULL, reinterpret_cast<LPTHREAD_START_ROUTINE>(init), nullptr, NULL, nullptr);
 				}
 			}

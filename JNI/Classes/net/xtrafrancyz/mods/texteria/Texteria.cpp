@@ -3,7 +3,7 @@
 #include "../../../../../Handler.h"
 
 string Texteria::tryGetServerId(string fallback) {
-	jclass Texteria = JNIHandler::FindClassFromCaller("net/xtrafrancyz/mods/texteria/Texteria");
+	jclass Texteria = JNIHandler::FindClass("net.xtrafrancyz.mods.texteria.Texteria");
 	jmethodID mid = JNIHandler::env->GetStaticMethodID(Texteria, "tryGetServerId", "(Ljava/lang/String;)Ljava/lang/String;");
 	jstring serverId = static_cast<jstring>(JNIHandler::env->CallStaticObjectMethod(Texteria, mid, JNIHandler::env->NewStringUTF(fallback.c_str())));
 	
@@ -12,5 +12,7 @@ string Texteria::tryGetServerId(string fallback) {
 	string server = string(cServerId);
 
 	JNIHandler::env->ReleaseStringUTFChars(serverId, cServerId);
+	JNIHandler::env->DeleteLocalRef(serverId);
+	JNIHandler::env->DeleteLocalRef(Texteria);
 	return server;
 }

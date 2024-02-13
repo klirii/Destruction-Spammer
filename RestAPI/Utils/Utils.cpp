@@ -23,7 +23,7 @@ namespace RestAPI {
 
 	std::string Utils::get_ip() {
 		HINTERNET net = InternetOpenA("IP retriever", INTERNET_OPEN_TYPE_PRECONFIG, nullptr, nullptr, NULL);
-		HINTERNET conn = InternetOpenUrlA(net, "http://myexternalip.com/raw", nullptr, 0, INTERNET_FLAG_RELOAD, 0);
+		HINTERNET conn = InternetOpenUrlA(net, "https://api.ipify.org/?format=raw", nullptr, 0, INTERNET_FLAG_RELOAD, 0);
 
 		char buffer[16];
 		DWORD read = NULL;

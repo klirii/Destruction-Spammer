@@ -1,6 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define DLL_VIMEWORLD_ATTACH 0x888
 
+#pragma warning(disable:4244)
+
 #include <Windows.h>
 #include <iostream>
 

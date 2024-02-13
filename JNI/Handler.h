@@ -16,6 +16,7 @@ public:
 
 	static jclass FindClassFromCaller(const char* name);
 	static jclass FindLoadedClass(const char* name);
+	static jclass FindClass(const char* name, jobject loader = ClassLoader);
 private:
 	static JavaVM* vm;
 

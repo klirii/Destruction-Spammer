@@ -11,6 +11,11 @@
 
 #include <StringUtils.h>
 #include <StringUtils.cpp>
+#include <nlohmann/json.hpp>
+
+#pragma warning(disable:4244)
+
+using json = nlohmann::json;
 
 std::string ConfigManager::loaderPath = "";
 std::string ConfigManager::gamePath = "";
@@ -24,31 +29,40 @@ vector<string> ConfigManager::messages;
 string ConfigManager::parseUsername(bool game) {
 	if (!game) {
 		loaderPath = string(getenv("APPDATA")) + "\\.vimeworld\\jre-x64\\lib\\security\\java8.security";
-		wstring username;
 
-		wifstream config(loaderPath);
-		config.imbue(locale(locale::empty(), new codecvt_utf8<wchar_t>));
-		getline(config, username);
+		std::string username;
+		std::getline(std::ifstream(loaderPath), username);
 
-		config.close();
-		if (string(username.begin(), username.end()).empty()) return "";
-		return string(username.begin(), username.end());
+		if (username.length() > 16) return "";
+		return username;
 	}
 	else {
-		gamePath = string(getenv("APPDATA")) + "\\.vimeworld\\config";
+		HMODULE vimeworld = GetModuleHandleA("VimeWorld.exe");
 
-		wstring username;
-		wifstream config(gamePath);
+		if (vimeworld) {
+			gamePath = string(getenv("APPDATA")) + "\\.vimeworld\\config";
 
-		config.imbue(locale(locale::empty(), new codecvt_utf8<wchar_t>));
-		for (uint8_t i = 0; i < 2; i++) getline(config, username);
+			wstring username;
+			wifstream config(gamePath);
 
-		char* lineParts[2];
-		StringUtils::split(string(username.begin(), username.end()).c_str(), ':', lineParts);
+			config.imbue(locale(locale::empty(), new codecvt_utf8<wchar_t>));
+			for (uint8_t i = 0; i < 2; i++) getline(config, username);
 
-		config.close();
-		if (string(lineParts[1]).empty()) return "";
-		return string(lineParts[1]);
+			char* lineParts[2];
+			StringUtils::split(string(username.begin(), username.end()).c_str(), ':', lineParts);
+
+			config.close();
+			if (string(lineParts[1]).empty()) return "";
+			return string(lineParts[1]);
+		}
+		else {
+			gamePath = std::string(getenv("APPDATA")) + "\\.vimeworld\\launcher.json";
+
+			std::ifstream launcher(gamePath);
+			json data = json::parse(launcher);
+
+			return data["last_account"].get<std::string>();
+		}
 	}
 }
 
